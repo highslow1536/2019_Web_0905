@@ -7,7 +7,7 @@ var connection = mysql.createConnection(mysqlConfig.mysqlConfig);
 const port = 3003;
 
 connection.connect();
-fwaljwakfjwalkjklawfj
+
 connection.query('select * from test', function(err, rows, fields) {
     if (!err) {
         console.log('Success ', rows)
