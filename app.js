@@ -1,26 +1,16 @@
-import * as mysqlConfig from './config/mysql';
-const express = require('express');
-var cors = require('cors');
-const app = express();
-var mysql = require('mysql');
-var connection = mysql.createConnection(mysqlConfig.mysqlConfig);
-const port = 3003;
+const express = require('express')
+var cors = require('cors')
+const app = express()
+const port = 3004
 
-connection.connect();
+const {userRouter} = require('./routes/user')
 
-connection.query('select * from test', function(err, rows, fields) {
-    if (!err) {
-        console.log('Success ', rows)
-    } else {
-        console.log('err ',err)
-    }
-})
 app.use(express.json());
-app.use(cors());
+app.use(cors())
 
-app.use(express.static('public'));
-connection.end();
+app.use(express.static('public'))
+app.use('/user',userRouter)
 
 app.listen(port, () => {
-    console.log("Server "+port+"is start....");
+    console.log("Server "+port+"is start....")
 })

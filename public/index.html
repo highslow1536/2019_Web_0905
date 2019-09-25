@@ -4,12 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div></div>
-    <div>
-        <h1></h1>
+    <form></form>
+        <input type="text" id="email">
+        <input type="text" id="password">
+        <input type="text" id="name">
+        <button class="requestBtn1"></button>
     </div>
+    <script>
+        var requestBtn1 = document.querySelector('.requestBtn1')
+
+        requestBtn1.addEventListener('click',(e)=>{
+            e.preventDefault() // requestBtn의 기본 기능 제거
+            requestAPI()
+        })
+
+        function requestAPI() {
+            const id = $('#email').val()
+            const password = $('#password').val()
+            const name = $('#name').val()
+            const queryData = {
+                userid: id,
+                username: name,
+                userpassword: password
+            }
+
+            alert($('form').serializeArray())
+            $.ajax({
+                url: './user/create',
+                type: 'post',
+                data: queryData,
+                success:function(data){
+                    console.log("success")
+                }
+            })
+        }
+    </script>
 </body>
 </html>
